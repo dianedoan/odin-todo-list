@@ -80,4 +80,6 @@ header {
     display: flex;
     border-radius: 5px;
     border: 1px solid var(--shadow-color);
+    flex-direction: row;
+    justify-content: space-between;
 }

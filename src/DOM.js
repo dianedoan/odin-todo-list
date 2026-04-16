@@ -67,6 +67,11 @@ export function displayProjectTodos(project) {
         todoItem.appendChild(todoTitle);
 
         todoContainer.appendChild(todoItem);
+
+        // todo due date
+        const todoDueDate = document.createElement("p");
+        todoDueDate.textContent = `DUE: ${todo.dueDate}`;
+        todoItem.appendChild(todoDueDate);
     });
 
     contentContainer.appendChild(todoContainer);
