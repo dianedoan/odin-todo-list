@@ -56,12 +56,6 @@ export function displayInboxTodos(app) {
     const inboxTitle = document.createElement("h2");
     inboxTitle.textContent = app.createInbox().title;
     projectHeader.appendChild(inboxTitle);
-    
-    // delete project button
-    const deleteProjectButton = document.createElement("button");
-    deleteProjectButton.classList = "delete-project-btn";
-    deleteProjectButton.textContent = "Delete Project";
-    projectHeader.appendChild(deleteProjectButton);
 
     contentContainer.appendChild(projectHeader);
 
