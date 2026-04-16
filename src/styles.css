@@ -7,10 +7,11 @@
 }
 
 :root {
+    --accent-color: #85c1e4;
+    --button-color: #b3e3ff;
     --border-color: #383838;
     --shadow-color: #a3a3a3;
     --divider-color: #bbb;
-    --button-color: #85c1e4;
 }
 
 body {
@@ -26,7 +27,7 @@ body {
 }
 
 header {
-    background-color: #85c1e4;
+    background-color: var(--accent-color);
     padding: 30px;
     display: flex;
     justify-content: space-between;
@@ -67,6 +68,27 @@ header {
     border: 1px solid var(--shadow-color);
 }
 
+.project-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+.delete-project-btn {
+    border: 1px solid #383838; 
+    border-radius: 10px;
+    padding: 10px 0px;
+    background-color: var(--button-color);
+    color: #111111;
+    font-size: 0.8rem;
+    width: 100px;
+}
+
 .todo-list {
     display: flex;
     flex-direction: column;
@@ -99,6 +121,3 @@ header {
     right: 55px;
 }
 
-button {
-    cursor: pointer;
-}

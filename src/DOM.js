@@ -49,10 +49,21 @@ export function displayInboxTodos(app) {
     // clear existing display
     contentContainer.innerHTML = ""; 
 
+    const projectHeader = document.createElement("div");
+    projectHeader.classList = "project-header";
+    
     // display project name
     const inboxTitle = document.createElement("h2");
     inboxTitle.textContent = app.createInbox().title;
-    contentContainer.appendChild(inboxTitle);
+    projectHeader.appendChild(inboxTitle);
+    
+    // delete project button
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.classList = "delete-project-btn";
+    deleteProjectButton.textContent = "Delete Project";
+    projectHeader.appendChild(deleteProjectButton);
+
+    contentContainer.appendChild(projectHeader);
 
     // display todo list
     const todoContainer = document.createElement("div");
@@ -123,10 +134,21 @@ export function displayInboxTodos(app) {
 export function displayProjectTodos(project, app) {
     contentContainer.innerHTML = ""; // clear existing display
 
+    const projectHeader = document.createElement("div");
+    projectHeader.classList = "project-header";
+
     // display project name
     const projectTitle = document.createElement("h2");
     projectTitle.textContent = project.title;
-    contentContainer.appendChild(projectTitle);
+    projectHeader.appendChild(projectTitle);
+
+    // delete project button
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.classList = "delete-project-btn";
+    deleteProjectButton.textContent = "Delete Project";
+    projectHeader.appendChild(deleteProjectButton);
+
+    contentContainer.appendChild(projectHeader);
 
     // display todo list
     const todoContainer = document.createElement("div");
