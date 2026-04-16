@@ -2,30 +2,30 @@ const container = document.querySelector(".container");
 const sidebar = document.querySelector(".sidebar");
 const contentContainer = document.querySelector(".main-content");
 
-export function displayProjects(inboxProject, projectList) {
-    sidebar.innerHTML = ""; // clear existing display
-
+export function displayProjects(app) {
     const projectsContainer = document.createElement("div");
     projectsContainer.classList = "project-list";
+    
+    // clear existing display
+    projectsContainer.innerHTML = ""; 
 
-    // display inbox
     const inboxItem = document.createElement("div");
     inboxItem.classList = "project-item";
 
     // display project name
     const inboxTitle = document.createElement("h4");
-    inboxTitle.textContent = inboxProject.title;
+    inboxTitle.textContent = app.createInbox().title;
     inboxItem.appendChild(inboxTitle);
 
     projectsContainer.appendChild(inboxItem);
 
-    // navigate to inbox
+    // navigate to corresponding project
     inboxItem.addEventListener("click", () => {
-        displayTodos(inboxProject);
+        displayInboxTodos(app);
     });
 
     // display all projects
-    projectList.forEach(project => {
+    app.projectList.forEach(project => {
         const projectItem = document.createElement("div");
         projectItem.classList = "project-item";
 
@@ -38,14 +38,89 @@ export function displayProjects(inboxProject, projectList) {
 
         // navigate to corresponding project
         projectItem.addEventListener("click", () => {
-            displayTodos(project);
+            displayProjectTodos(project);
         });
     });
 
     sidebar.appendChild(projectsContainer);
 };
 
-export function displayTodos(project) {
+export function displayInboxTodos(app) {
+    // clear existing display
+    contentContainer.innerHTML = ""; 
+
+    // display project name
+    const inboxTitle = document.createElement("h2");
+    inboxTitle.textContent = app.createInbox().title;
+    contentContainer.appendChild(inboxTitle);
+
+    // display todo list
+    const todoContainer = document.createElement("div");
+    todoContainer.classList = "todo-list";
+    const list = document.createElement("ul");
+
+    app.todoList.forEach(todo => {
+        const todoItem = document.createElement("li")
+        todoItem.classList = "todo-item";
+
+        const generalTodoContainer = document.createElement("div");
+        generalTodoContainer.classList = "general-todo";
+
+        // todo title
+        const todoTitle = document.createElement("p");
+        todoTitle.textContent = todo.title;
+        generalTodoContainer.appendChild(todoTitle);
+        
+        // todo due date
+        const todoDueDate = document.createElement("p");
+        todoDueDate.textContent = `DUE: ${todo.dueDate}`;
+        generalTodoContainer.appendChild(todoDueDate);
+
+        // delete button
+        const todoDelete = document.createElement("button");
+        todoDelete.classList = "todo-delete";
+        todoDelete.textContent = `×`;
+        generalTodoContainer.appendChild(todoDelete);
+        
+        todoDelete.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            // remove todo from todo list
+            app.removeTodo(todo);
+
+            // re-display todo list
+            displayInboxTodos(app);
+        });
+
+        todoItem.appendChild(generalTodoContainer);     
+
+        // expand single todo details on click
+        todoItem.addEventListener("click", () => {
+            // close details if opened 
+            const existingDetails = todoItem.querySelector(".todo-details");
+            if (todoItem.querySelector(".todo-details")) {
+                existingDetails.remove();
+                return;
+            }
+
+            const todoDetails = document.createElement("div");
+            todoDetails.classList = "todo-details";
+
+            // description
+            const todoDescription = document.createElement("p");
+            todoDescription.textContent = todo.description;
+
+            todoDetails.appendChild(todoDescription);
+            todoItem.appendChild(todoDetails);
+        });
+
+        todoContainer.appendChild(todoItem);
+    });
+
+    contentContainer.appendChild(todoContainer);
+}
+
+export function displayProjectTodos(project, app) {
     contentContainer.innerHTML = ""; // clear existing display
 
     // display project name
@@ -84,11 +159,13 @@ export function displayTodos(project) {
         todoDelete.addEventListener("click", (e) => {
             e.stopPropagation();
 
-            // delete todo from todo list
-            project.removeTodo(todo);
+            // remove todo from todo list
+            app.removeTodo(todo);
+            console.log(app.todoList);
+            console.log(project.todoList);
 
             // re-display todo list
-            displayTodos(project);
+            displayProjectTodos(project);
         });
 
         todoItem.appendChild(generalTodoContainer);     
