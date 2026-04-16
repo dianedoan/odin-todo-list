@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --border-color: #383838;
+    --shadow-color: #a3a3a3;
+    --divider-color: #bbb;
+}
+
+body {
+    background-color: #eee;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #eee;
+}
+
+header {
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0px 5px 5px var(--shadow-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-list {
+    display: grid;
+    gap: 20px;
+    padding: 30px;
+}
+
+.project-item {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 1px solid var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-list {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+li {
+    list-style-type: none;
+}
+
+li:not(:last-child) {
+    padding-top: 10px;
+}
