@@ -3,6 +3,8 @@ const sidebar = document.querySelector(".sidebar");
 const contentContainer = document.querySelector(".main-content");
 
 export function displayProjects(inboxProject, projectList) {
+    sidebar.innerHTML = ""; // clear existing display
+
     const projectsContainer = document.createElement("div");
     projectsContainer.classList = "project-list";
 
@@ -19,8 +21,7 @@ export function displayProjects(inboxProject, projectList) {
 
     // navigate to inbox
     inboxItem.addEventListener("click", () => {
-        contentContainer.innerHTML = ""; // clear existing display
-        displayProjectTodos(inboxProject);
+        displayTodos(inboxProject);
     });
 
     // display all projects
@@ -37,15 +38,16 @@ export function displayProjects(inboxProject, projectList) {
 
         // navigate to corresponding project
         projectItem.addEventListener("click", () => {
-	        contentContainer.innerHTML = ""; // clear existing display
-            displayProjectTodos(project);
+            displayTodos(project);
         });
     });
 
     sidebar.appendChild(projectsContainer);
 };
 
-export function displayProjectTodos(project) {
+export function displayTodos(project) {
+    contentContainer.innerHTML = ""; // clear existing display
+
     // display project name
     const projectTitle = document.createElement("h2");
     projectTitle.textContent = project.title;
@@ -67,12 +69,29 @@ export function displayProjectTodos(project) {
         const todoTitle = document.createElement("p");
         todoTitle.textContent = todo.title;
         generalTodoContainer.appendChild(todoTitle);
+        
         // todo due date
         const todoDueDate = document.createElement("p");
         todoDueDate.textContent = `DUE: ${todo.dueDate}`;
         generalTodoContainer.appendChild(todoDueDate);
 
-        todoItem.appendChild(generalTodoContainer);        
+        // delete button
+        const todoDelete = document.createElement("button");
+        todoDelete.classList = "todo-delete";
+        todoDelete.textContent = `×`;
+        generalTodoContainer.appendChild(todoDelete);
+        
+        todoDelete.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            // delete todo from todo list
+            project.removeTodo(todo);
+
+            // re-display todo list
+            displayTodos(project);
+        });
+
+        todoItem.appendChild(generalTodoContainer);     
 
         // expand single todo details on click
         todoItem.addEventListener("click", () => {

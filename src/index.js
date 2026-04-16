@@ -1,5 +1,5 @@
 import "./styles.css";
-import { displayProjects, displayProjectTodos } from "./DOM.js";
+import { displayProjects, displayTodos } from "./DOM.js";
 
 class App {
     constructor() {
@@ -36,6 +36,11 @@ class Project {
         let newTodo = new Todo(title, description, dueDate, priority);
         this.todoList.push(newTodo);
     }
+
+    removeTodo(todo) {
+        const index = this.todoList.findIndex(item => item.id === todo.id); // find index
+        this.todoList.splice(index, 1); // remove todo from todo list
+    }
 }
 
 class Todo {
@@ -44,6 +49,7 @@ class Todo {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+		this.id = crypto.randomUUID();
     }   
 }
 
@@ -56,4 +62,4 @@ const todo3 = myProject2.createTodo("workout", "leg day", "04-19-2026", "medium"
 
 // startup default page
 displayProjects(app.createInbox(), app.projectList);
-displayProjectTodos(app.createInbox());
+displayTodos(app.createInbox());
