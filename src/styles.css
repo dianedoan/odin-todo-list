@@ -77,9 +77,14 @@ header {
     list-style-type: none;
     background-color: #fff;
     padding: 15px;
-    display: flex;
     border-radius: 5px;
     border: 1px solid var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.general-todo {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
