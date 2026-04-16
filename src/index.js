@@ -1,5 +1,5 @@
 import "./styles.css";
-import { displayProjects } from "./DOM.js";
+import { displayProjects, displayProjectTodos } from "./DOM.js";
 
 class App {
     constructor() {
