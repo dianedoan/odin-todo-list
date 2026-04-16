@@ -1,4 +1,5 @@
 import "./styles.css";
+import { displayProjects } from "./DOM.js";
 
 class App {
     constructor() {
@@ -39,3 +40,5 @@ const myProject2 = app.createProject("Project 2");
 const todo1 = myProject1.createTodo("finish project", "add styling", "04-14-2026", "high");
 const todo2 = myProject1.createTodo("finish chores", "wash dishes", "04-21-2026", "low");
 console.log(app);
+
+displayProjects(app.projectList);
