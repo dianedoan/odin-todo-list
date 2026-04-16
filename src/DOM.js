@@ -1,5 +1,6 @@
 const container = document.querySelector(".container");
 const sidebar = document.querySelector(".sidebar");
+const contentContainer = document.querySelector(".main-content");
 
 export function displayProjects(inboxProject, projectList) {
     const projectsContainer = document.createElement("div");
@@ -16,6 +17,12 @@ export function displayProjects(inboxProject, projectList) {
 
     projectsContainer.appendChild(inboxItem);
 
+    // navigate to inbox
+    inboxItem.addEventListener("click", () => {
+        contentContainer.innerHTML = ""; // clear existing display
+        displayProjectTodos(inboxProject);
+    });
+
     // display all projects
     projectList.forEach(project => {
         const projectItem = document.createElement("div");
@@ -27,13 +34,18 @@ export function displayProjects(inboxProject, projectList) {
         projectItem.appendChild(projectTitle);
 
         projectsContainer.appendChild(projectItem);
+
+        // navigate to corresponding project
+        projectItem.addEventListener("click", () => {
+	        contentContainer.innerHTML = ""; // clear existing display
+            displayProjectTodos(project);
+        });
     });
 
     sidebar.appendChild(projectsContainer);
 };
 
 export function displayProjectTodos(project) {
-    const contentContainer = document.querySelector(".main-content");
 
     // display project name
     const projectTitle = document.createElement("h2");

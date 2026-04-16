@@ -52,6 +52,7 @@ const myProject1 = app.createProject("Project 1");
 const myProject2 = app.createProject("Project 2");
 const todo1 = myProject1.createTodo("finish project", "add styling", "04-14-2026", "high");
 const todo2 = myProject1.createTodo("finish chores", "wash dishes", "04-21-2026", "low");
+const todo3 = myProject2.createTodo("workout", "leg day", "04-19-2026", "medium");
 
 // startup default page
 displayProjects(app.createInbox(), app.projectList);
