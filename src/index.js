@@ -1,10 +1,9 @@
 import "./styles.css";
-import { displayProjects, displayInboxTodos, displayTodos } from "./DOM.js";
+import { displayProjects, displayInboxTodos } from "./DOM.js";
 
 class App {
     constructor() {
         this.projectList = [];
-        this.todoList = []; // todos from all projects in the app
     }
 
     createInbox() {
@@ -20,18 +19,12 @@ class App {
 
     createTodo(project, title, description, dueDate, priority) {
         const newTodo = new Todo(title, description, dueDate, priority, project);
-        this.todoList.push(newTodo);
         project.todoList.push(newTodo);
         return newTodo;
     }
     
     removeTodo(todo) {
-        // remove todo from app todo list
-        const index = this.todoList.findIndex(item => item.id === todo.id);
-        this.todoList.splice(index, 1); 
-
-        // remove todo from project
-        const projectIndex = this.todoList.findIndex(item => item.id === todo.id);
+        const projectIndex = todo.project.todoList.findIndex(item => item.id === todo.id);
         todo.project.todoList.splice(projectIndex, 1);
     }
 }
