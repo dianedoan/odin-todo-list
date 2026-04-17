@@ -60,7 +60,7 @@ header {
     gap: 5px;
 }
 
-.project-item {
+.inbox-item, .project-item {
     padding: 10px;
     display: flex;
     flex-direction: column;

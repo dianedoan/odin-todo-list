@@ -1,29 +1,14 @@
 const container = document.querySelector(".container");
 const sidebar = document.querySelector(".sidebar");
 const contentContainer = document.querySelector(".main-content");
+const projectsContainer = document.querySelector(".project-list");
 
 export function displayProjects(app) {
-    const projectsContainer = document.createElement("div");
-    projectsContainer.classList = "project-list";
+    const inboxItem = document.querySelector(".inbox-item");
+
+    // navigate to inbox
+    inboxItem.addEventListener("click", () => displayInboxTodos(app));
     
-    // clear existing display
-    projectsContainer.innerHTML = ""; 
-
-    const inboxItem = document.createElement("div");
-    inboxItem.classList = "project-item";
-
-    // display project name
-    const inboxTitle = document.createElement("h4");
-    inboxTitle.textContent = app.createInbox().title;
-    inboxItem.appendChild(inboxTitle);
-
-    projectsContainer.appendChild(inboxItem);
-
-    // navigate to corresponding project
-    inboxItem.addEventListener("click", () => {
-        displayInboxTodos(app);
-    });
-
     // display all projects
     app.projectList.forEach(project => {
         const projectItem = document.createElement("div");
@@ -37,12 +22,8 @@ export function displayProjects(app) {
         projectsContainer.appendChild(projectItem);
 
         // navigate to corresponding project
-        projectItem.addEventListener("click", () => {
-            displayProjectTodos(project);
-        });
+        projectItem.addEventListener("click", () => displayProjectTodos(project, app));
     });
-
-    sidebar.appendChild(projectsContainer);
 };
 
 export function displayInboxTodos(app) {
@@ -52,7 +33,7 @@ export function displayInboxTodos(app) {
     const projectHeader = document.createElement("div");
     projectHeader.classList = "project-header";
     
-    // display project name
+    // display inbox name
     const inboxTitle = document.createElement("h2");
     inboxTitle.textContent = app.createInbox().title;
     projectHeader.appendChild(inboxTitle);
@@ -64,69 +45,15 @@ export function displayInboxTodos(app) {
     todoContainer.classList = "todo-list";
     const list = document.createElement("ul");
 
-    app.todoList.forEach(todo => {
-        const todoItem = document.createElement("li")
-        todoItem.classList = "todo-item";
-
-        const generalTodoContainer = document.createElement("div");
-        generalTodoContainer.classList = "general-todo";
-
-        // todo title
-        const todoTitle = document.createElement("p");
-        todoTitle.textContent = todo.title;
-        generalTodoContainer.appendChild(todoTitle);
-        
-        // todo due date
-        const todoDueDate = document.createElement("p");
-        todoDueDate.textContent = `DUE: ${todo.dueDate}`;
-        generalTodoContainer.appendChild(todoDueDate);
-
-        // delete button
-        const todoDelete = document.createElement("button");
-        todoDelete.classList = "todo-delete";
-        todoDelete.textContent = `×`;
-        generalTodoContainer.appendChild(todoDelete);
-        
-        todoDelete.addEventListener("click", (e) => {
-            e.stopPropagation();
-
-            // remove todo from todo list
-            app.removeTodo(todo);
-
-            // re-display todo list
-            displayInboxTodos(app);
-        });
-
-        todoItem.appendChild(generalTodoContainer);     
-
-        // expand single todo details on click
-        todoItem.addEventListener("click", () => {
-            // close details if opened 
-            const existingDetails = todoItem.querySelector(".todo-details");
-            if (todoItem.querySelector(".todo-details")) {
-                existingDetails.remove();
-                return;
-            }
-
-            const todoDetails = document.createElement("div");
-            todoDetails.classList = "todo-details";
-
-            // description
-            const todoDescription = document.createElement("p");
-            todoDescription.textContent = todo.description;
-
-            todoDetails.appendChild(todoDescription);
-            todoItem.appendChild(todoDetails);
-        });
-
-        todoContainer.appendChild(todoItem);
-    });
-
+    // display todos from all projects
+    app.projectList.forEach(project => displayTodos(project, todoContainer));
+    
     contentContainer.appendChild(todoContainer);
 }
 
-export function displayProjectTodos(project, app) {
-    contentContainer.innerHTML = ""; // clear existing display
+function displayProjectTodos(project, app) {
+    // clear existing display
+    contentContainer.innerHTML = ""; 
 
     const projectHeader = document.createElement("div");
     projectHeader.classList = "project-header";
@@ -149,6 +76,12 @@ export function displayProjectTodos(project, app) {
     todoContainer.classList = "todo-list";
     const list = document.createElement("ul");
 
+    displayTodos(project, todoContainer);
+
+    contentContainer.appendChild(todoContainer);
+}
+
+function displayTodos(project, todoContainer) {
     project.todoList.forEach(todo => {
         const todoItem = document.createElement("li")
         todoItem.classList = "todo-item";
@@ -172,42 +105,38 @@ export function displayProjectTodos(project, app) {
         todoDelete.textContent = `×`;
         generalTodoContainer.appendChild(todoDelete);
         
+        todoItem.appendChild(generalTodoContainer);
+        todoContainer.appendChild(todoItem);
+
+        // event listeners
         todoDelete.addEventListener("click", (e) => {
             e.stopPropagation();
-
-            // remove todo from todo list
             app.removeTodo(todo);
-            console.log(app.todoList);
-            console.log(project.todoList);
 
             // re-display todo list
-            displayProjectTodos(project);
+            displayProjectTodos(project, app);
         });
-
-        todoItem.appendChild(generalTodoContainer);     
 
         // expand single todo details on click
-        todoItem.addEventListener("click", () => {
-            // close details if opened 
-            const existingDetails = todoItem.querySelector(".todo-details");
-            if (todoItem.querySelector(".todo-details")) {
-                existingDetails.remove();
-                return;
-            }
-
-            const todoDetails = document.createElement("div");
-            todoDetails.classList = "todo-details";
-
-            // description
-            const todoDescription = document.createElement("p");
-            todoDescription.textContent = todo.description;
-
-            todoDetails.appendChild(todoDescription);
-            todoItem.appendChild(todoDetails);
-        });
-
-        todoContainer.appendChild(todoItem);
+        todoItem.addEventListener("click", () => expandTodo(todoItem, todo));
     });
+};
 
-    contentContainer.appendChild(todoContainer);
-}
+function expandTodo(todoItem, todo) {
+    // close details if opened 
+    const existingDetails = todoItem.querySelector(".todo-details");
+    if (todoItem.querySelector(".todo-details")) {
+        existingDetails.remove();
+        return;
+    }
+
+    const todoDetails = document.createElement("div");
+    todoDetails.classList = "todo-details";
+
+    // description
+    const todoDescription = document.createElement("p");
+    todoDescription.textContent = todo.description;
+
+    todoDetails.appendChild(todoDescription);
+    todoItem.appendChild(todoDetails);
+};
