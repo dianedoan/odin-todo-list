@@ -272,17 +272,18 @@ button {
     align-items: center;
 }
 
-.todo-title-container {
+.todo-title-container, .priority-duedate-container {
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
-.todo-delete {
-    border: none;
-    background-color: #fff;
-    font-size: 1.6rem;
-    position: absolute;
-    right: 55px;
+.todo-priority {
+    border: 1px solid var(--border-color);
+    color: var(--border-color);
+    border-radius: 20px;
+    padding: 4px 7px;
+    font-size: 0.6rem;
+    margin: 0 5px;
 }
-

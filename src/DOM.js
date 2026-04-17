@@ -132,12 +132,36 @@ function displayTodos(project, app, todoContainer) {
         chevronDownIcon.classList = "todo-chevron";
         todoTitleContainer.appendChild(chevronDownIcon);
         generalTodoContainer.appendChild(todoTitleContainer);
+
+        const priorityDueDateContainer = document.createElement("div");
+        priorityDueDateContainer.classList = "priority-duedate-container";
+
+        // priority
+        const todoPriority = document.createElement("p");
+        todoPriority.textContent = todo.priority;
+        todoPriority.classList = "todo-priority";
+        priorityDueDateContainer.appendChild(todoPriority);
+
+        // set color based on priority
+        if (todo.priority == "low") {
+            todoPriority.style.backgroundColor = "#9ff595";
+            todoPriority.style.borderColor = "mediumseagreen";
+        } else if (todo.priority == "medium") {
+            todoPriority.style.backgroundColor = "#f5eb95";
+            todoPriority.style.borderColor = "darkgoldenrod";
+        } else if (todo.priority == "high") {
+            todoPriority.style.backgroundColor = "#ff9999";
+            todoPriority.style.borderColor = "darkred";
+        } else {
+            priorityDueDateContainer.removeChild(todoPriority);
+        }
         
         // todo due date
         const todoDueDate = document.createElement("p");
         todoDueDate.textContent = todo.dueDate;
-        generalTodoContainer.appendChild(todoDueDate);
-        
+        priorityDueDateContainer.appendChild(todoDueDate);
+        generalTodoContainer.appendChild(priorityDueDateContainer);
+
         todoItem.appendChild(generalTodoContainer);
         todoContainer.appendChild(todoItem);
         
