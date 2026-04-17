@@ -6,6 +6,12 @@ const projectsContainer = document.querySelector(".project-list");
 export function displayProjects(app) {
     const inboxItem = document.querySelector(".inbox-item");
 
+    // clear existing display
+    projectsContainer.innerHTML = "";
+
+    // re-add inbox
+    projectsContainer.appendChild(inboxItem);
+
     // navigate to inbox
     inboxItem.addEventListener("click", () => displayInboxTodos(app));
     
@@ -46,7 +52,7 @@ export function displayInboxTodos(app) {
     const list = document.createElement("ul");
 
     // display todos from all projects
-    app.projectList.forEach(project => displayTodos(project, todoContainer));
+    app.projectList.forEach(project => displayTodos(project, app, todoContainer));
     
     contentContainer.appendChild(todoContainer);
 }
@@ -76,12 +82,12 @@ function displayProjectTodos(project, app) {
     todoContainer.classList = "todo-list";
     const list = document.createElement("ul");
 
-    displayTodos(project, todoContainer);
+    displayTodos(project, app, todoContainer);
 
     contentContainer.appendChild(todoContainer);
 }
 
-function displayTodos(project, todoContainer) {
+function displayTodos(project, app, todoContainer) {
     project.todoList.forEach(todo => {
         const todoItem = document.createElement("li")
         todoItem.classList = "todo-item";
@@ -107,18 +113,21 @@ function displayTodos(project, todoContainer) {
         
         todoItem.appendChild(generalTodoContainer);
         todoContainer.appendChild(todoItem);
+        
+        // expand single todo details on click
+        todoItem.addEventListener("click", () => expandTodo(todoItem, todo));
 
-        // event listeners
         todoDelete.addEventListener("click", (e) => {
             e.stopPropagation();
             app.removeTodo(todo);
 
-            // re-display todo list
-            displayProjectTodos(project, app);
+            const currentHeader = contentContainer.querySelector("h2")?.textContent;
+            if (currentHeader === app.createInbox().title) {
+                displayInboxTodos(app);
+            } else {
+                displayProjectTodos(project, app);
+            }
         });
-
-        // expand single todo details on click
-        todoItem.addEventListener("click", () => expandTodo(todoItem, todo));
     });
 };
 
