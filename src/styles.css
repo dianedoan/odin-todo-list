@@ -177,7 +177,13 @@ button {
     cursor: pointer;
 }
 
-.create-project-btn, .delete-project-btn, .edit-todo-btn, .submit-todo-btn {
+.button-container {
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+}
+
+.create-project-btn, .delete-project-btn, .edit-todo-btn, .submit-todo-btn, .delete-todo-btn {
     background-color: var(--button-color);
     color: #fff;
     font-weight: bold;
@@ -187,7 +193,7 @@ button {
     font-size: 0.8rem;
 }
 
-.create-project-btn, .delete-project-btn, .submit-todo-btn {
+.create-project-btn, .delete-project-btn, .submit-todo-btn, .delete-todo-btn {
     width: 100px;
     padding: 8px 0px;
     margin-left: 10px;
@@ -199,8 +205,8 @@ button {
     margin: 5px 0;
 }
 
-.submit-todo-btn {
-    align-self: end;
+.delete-todo-btn {
+    background-color: var(--shadow-color);
 }
 
 .todo-list {
@@ -254,7 +260,6 @@ button {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-right: 22px;
 }
 
 .todo-title-container {

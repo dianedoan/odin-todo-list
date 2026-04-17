@@ -138,34 +138,34 @@ function displayTodos(project, app, todoContainer) {
         todoDueDate.textContent = todo.dueDate;
         generalTodoContainer.appendChild(todoDueDate);
 
-        // delete button
-        const todoDeleteBtn = document.createElement("button");
-        todoDeleteBtn.classList = "todo-delete";
-        todoDeleteBtn.textContent = `×`;
-        generalTodoContainer.appendChild(todoDeleteBtn);
+        // // delete button
+        // const todoDeleteBtn = document.createElement("button");
+        // todoDeleteBtn.classList = "todo-delete";
+        // todoDeleteBtn.textContent = `×`;
+        // generalTodoContainer.appendChild(todoDeleteBtn);
         
         todoItem.appendChild(generalTodoContainer);
         todoContainer.appendChild(todoItem);
         
-        // handle todo delete 
-        todoDeleteBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            app.removeTodo(todo);
+        // // handle todo delete 
+        // todoDeleteBtn.addEventListener("click", (e) => {
+        //     e.stopPropagation();
+        //     app.removeTodo(todo);
             
-            const currentHeader = contentContainer.querySelector("h2")?.textContent;
-            if (currentHeader === app.createInbox().title) {
-                displayInboxTodos(app);
-            } else {
-                displayProjectTodos(project, app);
-            }
-        });
+        //     const currentHeader = contentContainer.querySelector("h2")?.textContent;
+        //     if (currentHeader === app.createInbox().title) {
+        //         displayInboxTodos(app);
+        //     } else {
+        //         displayProjectTodos(project, app);
+        //     }
+        // });
         
         // expand single todo details on click
-        chevronDownIcon.addEventListener("click", () => expandTodo(todoItem, todo));
+        chevronDownIcon.addEventListener("click", () => expandTodo(todoItem, todo, app));
     });
 };
 
-function expandTodo(todoItem, todo) {
+function expandTodo(todoItem, todo, app) {
     // close details if opened 
     const existingDetails = todoItem.querySelector(".todo-details");
     if (todoItem.querySelector(".todo-details")) {
@@ -286,13 +286,38 @@ function expandTodo(todoItem, todo) {
     editForm.appendChild(priorityContainer);
 
     editTodoDialog.appendChild(editForm);
+
+
+    // modal buttons
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList = "button-container";
+
+    // delete button
+    const deleteTodoBtn = document.createElement("button");
+    deleteTodoBtn.classList = "delete-todo-btn";
+    deleteTodoBtn.textContent = "Delete Todo"
+    buttonContainer.appendChild(deleteTodoBtn);
+
+    // handle todo delete 
+    deleteTodoBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        app.removeTodo(todo);
+        
+        const currentHeader = contentContainer.querySelector("h2")?.textContent;
+        if (currentHeader === app.createInbox().title) {
+            displayInboxTodos(app);
+        } else {
+            displayProjectTodos(project, app);
+        }
+    });
     
     // submit button
     const submitTodoBtn = document.createElement("button");
     submitTodoBtn.classList = "submit-todo-btn";
     submitTodoBtn.textContent = "Save Changes"
-    editTodoDialog.appendChild(submitTodoBtn);
-
+    buttonContainer.appendChild(submitTodoBtn);
+    
+    editTodoDialog.appendChild(buttonContainer);
     todoDetails.appendChild(editTodoDialog);
     
     todoItem.appendChild(todoDetails);
