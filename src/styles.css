@@ -111,16 +111,26 @@ button {
     cursor: pointer;
 }
 
-.create-project-btn, .delete-project-btn {
-    border: 1px solid var(--border-color); 
-    border-radius: 7px;
-    padding: 8px 0px;
+.create-project-btn, .delete-project-btn, .edit-todo-btn {
     background-color: var(--button-color);
     color: #fff;
-    text-shadow: 1px 1px var(--shadow-color);
+    font-weight: bold;
+    text-shadow: 1px 1px var(--border-color);
+    border: 1px solid var(--border-color); 
+    border-radius: 7px;
     font-size: 0.8rem;
+}
+
+.create-project-btn, .delete-project-btn {
     width: 100px;
+    padding: 8px 0px;
     margin-left: 10px;
+}
+
+.edit-todo-btn {
+    width: 45px;
+    padding: 6px 0px;
+    margin: 5px 0;
 }
 
 .todo-list {
@@ -170,7 +180,13 @@ input:focus {
 
 .todo-details {
     color: var(--border-color);
-    font-size: 0.9rem;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    font-style: italic;
 }
 
 .general-todo {

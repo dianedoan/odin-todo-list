@@ -80,14 +80,14 @@ function displayProjectTodos(project, app) {
     projectHeader.appendChild(projectTitle);
 
     // delete project button
-    const deleteProjectButton = document.createElement("button");
-    deleteProjectButton.classList = "delete-project-btn";
-    deleteProjectButton.textContent = "Delete Project";
-    projectHeader.appendChild(deleteProjectButton);
+    const deleteProjectBtn = document.createElement("button");
+    deleteProjectBtn.classList = "delete-project-btn";
+    deleteProjectBtn.textContent = "Delete Project";
+    projectHeader.appendChild(deleteProjectBtn);
 
     contentContainer.appendChild(projectHeader);
 
-    deleteProjectButton.addEventListener("click", () => {
+    deleteProjectBtn.addEventListener("click", () => {
         // delete project
         app.removeProject(project);
 
@@ -139,16 +139,16 @@ function displayTodos(project, app, todoContainer) {
         generalTodoContainer.appendChild(todoDueDate);
 
         // delete button
-        const todoDelete = document.createElement("button");
-        todoDelete.classList = "todo-delete";
-        todoDelete.textContent = `×`;
-        generalTodoContainer.appendChild(todoDelete);
+        const todoDeleteBtn = document.createElement("button");
+        todoDeleteBtn.classList = "todo-delete";
+        todoDeleteBtn.textContent = `×`;
+        generalTodoContainer.appendChild(todoDeleteBtn);
         
         todoItem.appendChild(generalTodoContainer);
         todoContainer.appendChild(todoItem);
         
         // handle todo delete 
-        todoDelete.addEventListener("click", (e) => {
+        todoDeleteBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             app.removeTodo(todo);
             
@@ -179,8 +179,14 @@ function expandTodo(todoItem, todo) {
     // description
     const todoDescription = document.createElement("p");
     todoDescription.textContent = todo.description;
-
     todoDetails.appendChild(todoDescription);
+    
+    // edit button
+    const editTodoBtn = document.createElement("button");
+    editTodoBtn.classList = "edit-todo-btn";
+    editTodoBtn.textContent = "Edit";
+    todoDetails.appendChild(editTodoBtn);
+
     todoItem.appendChild(todoDetails);
 };
 
