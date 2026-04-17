@@ -77,7 +77,6 @@ header {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    justify-content: space-between;
 }
 
 label {
@@ -94,10 +93,17 @@ input:focus, textarea:focus {
     outline: none;
 }
 
-#edit-todo-form {
+.form-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+#edit-todo-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 #edit-todo-form label {
@@ -253,6 +259,10 @@ button {
     align-items: center;
     padding: 0 5px;
     font-style: italic;
+}
+
+.todo-details p {
+    white-space: pre-wrap;
 }
 
 .general-todo {
