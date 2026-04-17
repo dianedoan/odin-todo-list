@@ -6,6 +6,14 @@ const projectsContainer = document.querySelector(".project-list");
 export function displayProjects(app) {
     const inboxItem = document.querySelector(".inbox-item");
 
+    // create project modal
+    const createProjectModal = document.querySelector("#create-project-dialog");
+
+    // close modal 
+    createProjectModal.addEventListener("close", () => {
+        // reset form
+    });
+
     // clear existing display
     projectsContainer.innerHTML = "";
 

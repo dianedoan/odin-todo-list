@@ -13,7 +13,14 @@
         <div class="sidebar">
             <div class="sidebar-header">
                 <h2>PROJECTS</h2>
-                <button class="create-project-btn">Create Project</button>
+                <button class="create-project-btn" command="show-modal" commandfor="create-project-dialog">Create Project</button>
+                <dialog id="create-project-dialog">
+                    <button id="close-btn" commandfor="create-project-dialog" command="close">×</button>
+                    <h4>Create Project</h4>
+                    <form id="create-project-form" action="">
+        
+                    </form>
+                </dialog>
             </div>
             <div class="project-list">
                 <h4 class="inbox-item">Inbox</h4>

@@ -59,6 +59,32 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+}
+
+#create-project-dialog {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    width: clamp(200px, 300px, 400px);
+    height: 250px;
+    align-self: center;
+    justify-self: center;
+}
+
+#create-project-dialog[open] {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#close-btn {
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 17px;
+    background-color: #fff;
+    font-size: 1.2rem;
 }
 
 .project-list {
@@ -94,6 +120,7 @@ button {
     text-shadow: 1px 1px var(--shadow-color);
     font-size: 0.8rem;
     width: 100px;
+    margin-left: 10px;
 }
 
 .todo-list {
