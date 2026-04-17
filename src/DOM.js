@@ -185,8 +185,116 @@ function expandTodo(todoItem, todo) {
     const editTodoBtn = document.createElement("button");
     editTodoBtn.classList = "edit-todo-btn";
     editTodoBtn.textContent = "Edit";
+
+    editTodoBtn.setAttribute("command", "show-modal");
+    editTodoBtn.setAttribute("commandfor", "edit-todo-dialog");
+
     todoDetails.appendChild(editTodoBtn);
 
+    // edit todo dialog
+    const editTodoDialog = document.createElement("dialog");
+    editTodoDialog.id = "edit-todo-dialog";
+
+    // close button
+    const closeButton = document.createElement("button");
+    closeButton.id = "close-btn";
+    closeButton.textContent = "×";
+    closeButton.setAttribute("command", "close");
+    closeButton.setAttribute("commandfor", "edit-todo-dialog");
+    editTodoDialog.appendChild(closeButton);
+
+    // modal header
+    const editHeader = document.createElement("h4");
+    editHeader.textContent = "Edit Todo";
+    editTodoDialog.appendChild(editHeader);
+
+    // form
+    const editForm = document.createElement("form");
+    editForm.id = "edit-todo-form";
+    
+    // title, description, duedate, priority
+    const todoTitleInput = document.createElement("input");
+    todoTitleInput.placeholder = "Title";
+    editForm.appendChild(todoTitleInput);
+
+    const todoDescriptionInput = document.createElement("textarea");
+    todoDescriptionInput.placeholder = "Description";
+    editForm.appendChild(todoDescriptionInput);
+
+    const dueDateContainer = document.createElement("div");
+    dueDateContainer.classList = "duedate-container";
+
+    const todoDueDateLabel = document.createElement("label");
+    todoDueDateLabel.textContent = "Due Date";
+    dueDateContainer.appendChild(todoDueDateLabel);
+
+    const todoDueDateInput = document.createElement("input");
+    todoDueDateInput.type = "date";
+    dueDateContainer.appendChild(todoDueDateInput);
+    editForm.appendChild(dueDateContainer);
+    
+    const priorityContainer = document.createElement("div");
+
+    const priorityLabel = document.createElement("label");
+    priorityLabel.textContent = "Priority";
+    priorityContainer.appendChild(priorityLabel);
+    priorityContainer.classList = "priority-container";
+
+    const priorityRadioContainer = document.createElement("div");
+    priorityRadioContainer.classList = "priority-radio-container";
+
+    const todoLowPriorityContainer = document.createElement("div");
+    todoLowPriorityContainer.classList = "priority-radio-item";
+    const todoLowPriorityInput = document.createElement("input");
+    todoLowPriorityInput.type = "radio";
+    todoLowPriorityInput.id = "low";
+    todoLowPriorityInput.name = "priority";
+    todoLowPriorityInput.value = "low";
+    todoLowPriorityContainer.appendChild(todoLowPriorityInput);
+    const todoLowPriorityLabel = document.createElement("label");
+    todoLowPriorityLabel.textContent = "Low";
+    todoLowPriorityContainer.appendChild(todoLowPriorityLabel);
+    priorityRadioContainer.appendChild(todoLowPriorityContainer);
+
+    const todoMediumPriorityContainer = document.createElement("div");
+    todoMediumPriorityContainer.classList = "priority-radio-item";
+    const todoMediumPriorityInput = document.createElement("input");
+    todoMediumPriorityInput.type = "radio";
+    todoMediumPriorityInput.id = "medium";
+    todoMediumPriorityInput.name = "priority";
+    todoMediumPriorityInput.value = "medium";
+    todoMediumPriorityContainer.appendChild(todoMediumPriorityInput);
+    const todoMediumPriorityLabel = document.createElement("label");
+    todoMediumPriorityLabel.textContent = "Medium";
+    todoMediumPriorityContainer.appendChild(todoMediumPriorityLabel);
+    priorityRadioContainer.appendChild(todoMediumPriorityContainer);
+
+    const todoHighPriorityContainer = document.createElement("div");
+    todoHighPriorityContainer.classList = "priority-radio-item";
+    const todoHighPriorityInput = document.createElement("input");
+    todoHighPriorityInput.type = "radio";
+    todoHighPriorityInput.id = "high";
+    todoHighPriorityInput.name = "priority";
+    todoHighPriorityInput.value = "high";
+    todoHighPriorityContainer.appendChild(todoHighPriorityInput);
+    const todoHighPriorityLabel = document.createElement("label");
+    todoHighPriorityLabel.textContent = "High";
+    todoHighPriorityContainer.appendChild(todoHighPriorityLabel);
+    priorityRadioContainer.appendChild(todoHighPriorityContainer);
+
+    priorityContainer.appendChild(priorityRadioContainer);
+    editForm.appendChild(priorityContainer);
+
+    editTodoDialog.appendChild(editForm);
+    
+    // submit button
+    const submitTodoBtn = document.createElement("button");
+    submitTodoBtn.classList = "submit-todo-btn";
+    submitTodoBtn.textContent = "Save Changes"
+    editTodoDialog.appendChild(submitTodoBtn);
+
+    todoDetails.appendChild(editTodoDialog);
+    
     todoItem.appendChild(todoDetails);
 };
 

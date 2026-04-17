@@ -62,29 +62,95 @@ header {
     align-items: center;
 }
 
-#create-project-dialog {
+#create-project-dialog, #edit-todo-dialog {
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 30px;
-    width: clamp(200px, 300px, 400px);
-    height: 250px;
+    width: clamp(300px, 400px, 500px);
+    height: 300px;
     align-self: center;
     justify-self: center;
+    font-style: normal;
 }
 
-#create-project-dialog[open] {
+#create-project-dialog[open], #edit-todo-dialog[open] {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     justify-content: space-between;
+}
+
+label {
+    font-size: 0.9rem;
+}
+
+input, textarea { 
+    border: none;
+    font-size: 1rem;
+    width: 100%;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}
+
+#edit-todo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#edit-todo-form label {
+    width: 80px;
+    align-self: center;
+    padding: 0 5px;
+}
+
+#edit-todo-form .priority-radio-item label {
+    width: auto;
+
+}
+
+#edit-todo-form input, #edit-todo-form textarea {
+    background-color: #e7e7e773;
+    border-radius: 5px;
+    padding: 6px;
+    font-size: 0.9rem;
+    width: 97%;
+}
+
+#edit-todo-form input[type="radio"] {
+    width: 12px;
+}
+
+#edit-todo-form textarea {
+    height: 70px;
+}
+
+.duedate-container, .priority-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.priority-radio-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.priority-radio-item {
+    display: flex;
+    flex-direction: row;
 }
 
 #close-btn {
     border: none;
     position: absolute;
-    top: 10px;
-    right: 17px;
+    top: 15px;
+    right: 20px;
     background-color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .project-list {
@@ -111,7 +177,7 @@ button {
     cursor: pointer;
 }
 
-.create-project-btn, .delete-project-btn, .edit-todo-btn {
+.create-project-btn, .delete-project-btn, .edit-todo-btn, .submit-todo-btn {
     background-color: var(--button-color);
     color: #fff;
     font-weight: bold;
@@ -121,7 +187,7 @@ button {
     font-size: 0.8rem;
 }
 
-.create-project-btn, .delete-project-btn {
+.create-project-btn, .delete-project-btn, .submit-todo-btn {
     width: 100px;
     padding: 8px 0px;
     margin-left: 10px;
@@ -131,6 +197,10 @@ button {
     width: 45px;
     padding: 6px 0px;
     margin: 5px 0;
+}
+
+.submit-todo-btn {
+    align-self: end;
 }
 
 .todo-list {
@@ -156,16 +226,6 @@ button {
     width: 20px;
 }
 
-input { 
-    border: none;
-    font-size: 1rem;
-    width: 100%;
-}
-
-input:focus {
-    outline: none;
-}
-
 .todo-item {
     list-style-type: none;
     background-color: #fff;
@@ -173,7 +233,7 @@ input:focus {
     border-radius: 5px;
     border: 1px solid var(--shadow-color);
     display: flex;
-    gap: 5px;
+    gap: 10px;
     font-size: 1rem;
     flex-direction: column;
 }
