@@ -1,52 +1,6 @@
 import "./styles.css";
+import App from "./App.js";
 import { displayProjects, displayInboxTodos } from "./DOM.js";
-
-class App {
-    constructor() {
-        this.projectList = [];
-    }
-
-    createInbox() {
-        const inbox = new Project("Inbox");
-        return inbox;
-    }
-    
-    createProject(title) {
-        const newProject = new Project(title);
-        this.projectList.push(newProject);
-        return newProject;
-    }
-
-    createTodo(project, title, description, dueDate, priority) {
-        const newTodo = new Todo(title, description, dueDate, priority, project);
-        project.todoList.push(newTodo);
-        return newTodo;
-    }
-    
-    removeTodo(todo) {
-        const projectIndex = todo.project.todoList.findIndex(item => item.id === todo.id);
-        todo.project.todoList.splice(projectIndex, 1);
-    }
-}
-
-class Project {
-    constructor(title, app) {
-        this.title = title;
-        this.app = app;
-        this.todoList = [];
-    }
-}
-
-class Todo {
-    constructor(title, description, dueDate, priority, project) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.project = project;
-		this.id = crypto.randomUUID();
-    }   
-}
 
 const app = new App();
 const myProject1 = app.createProject("Project 1");
