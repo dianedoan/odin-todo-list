@@ -77,6 +77,17 @@ function displayProjectTodos(project, app) {
 
     contentContainer.appendChild(projectHeader);
 
+    deleteProjectButton.addEventListener("click", () => {
+        // delete project
+        app.removeProject(project);
+
+        // re-render sidebar project list
+        displayProjects(app);
+
+        // display default page
+        displayInboxTodos(app);
+    });
+
     // display todo list
     const todoContainer = document.createElement("div");
     todoContainer.classList = "todo-list";
