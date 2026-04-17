@@ -129,6 +129,32 @@ button {
     gap: 5px;
 }
 
+.add-todo {
+    list-style-type: none;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--shadow-color);
+    display: flex;
+    gap: 5px;
+    font-size: 1rem;
+    flex-direction: row;
+}
+
+.todo-plus {
+    cursor: pointer;
+    width: 20px;
+}
+
+input { 
+    border: none;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+}
+
 .todo-item {
     list-style-type: none;
     background-color: #fff;
@@ -136,8 +162,9 @@ button {
     border-radius: 5px;
     border: 1px solid var(--shadow-color);
     display: flex;
-    flex-direction: column;
     gap: 5px;
+    font-size: 1rem;
+    flex-direction: column;
 }
 
 .todo-details {

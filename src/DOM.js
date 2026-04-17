@@ -1,3 +1,5 @@
+import plus from "./images/plus.svg";
+
 const container = document.querySelector(".container");
 const sidebar = document.querySelector(".sidebar");
 const contentContainer = document.querySelector(".main-content");
@@ -57,7 +59,6 @@ export function displayInboxTodos(app) {
     // display todo list
     const todoContainer = document.createElement("div");
     todoContainer.classList = "todo-list";
-    const list = document.createElement("ul");
 
     // display todos from all projects
     app.projectList.forEach(project => displayTodos(project, app, todoContainer));
@@ -99,7 +100,9 @@ function displayProjectTodos(project, app) {
     // display todo list
     const todoContainer = document.createElement("div");
     todoContainer.classList = "todo-list";
-    const list = document.createElement("ul");
+
+    // new todo button
+    addTodo(todoContainer, project, app);
 
     displayTodos(project, app, todoContainer);
 
@@ -108,7 +111,7 @@ function displayProjectTodos(project, app) {
 
 function displayTodos(project, app, todoContainer) {
     project.todoList.forEach(todo => {
-        const todoItem = document.createElement("li")
+        const todoItem = document.createElement("div")
         todoItem.classList = "todo-item";
 
         const generalTodoContainer = document.createElement("div");
@@ -121,7 +124,7 @@ function displayTodos(project, app, todoContainer) {
         
         // todo due date
         const todoDueDate = document.createElement("p");
-        todoDueDate.textContent = `DUE: ${todo.dueDate}`;
+        todoDueDate.textContent = todo.dueDate;
         generalTodoContainer.appendChild(todoDueDate);
 
         // delete button
@@ -167,4 +170,49 @@ function expandTodo(todoItem, todo) {
 
     todoDetails.appendChild(todoDescription);
     todoItem.appendChild(todoDetails);
+};
+
+function addTodo(todoContainer, project, app) {
+    const addTodoForm = document.createElement("form");
+    addTodoForm.classList = "add-todo";
+    
+    // icon
+    const plusIcon = document.createElement("img");
+    plusIcon.src = plus;
+    plusIcon.classList = "todo-plus";
+    plusIcon.type = "submit";
+    addTodoForm.appendChild(plusIcon);
+    
+    // input
+    const newTodo = document.createElement("input")
+    newTodo.type = "text";
+    newTodo.placeholder = "Add todo...";
+    addTodoForm.appendChild(newTodo);
+
+    // handle submit
+    addTodoForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // remove any whitespaces
+        const todoInput = newTodo.value.trim();
+
+        // prevent empty todo submits
+        if (!todoInput) return;
+
+        // create todo
+        app.createTodo(project, todoInput, "", "", "");
+
+        // clear input
+        newTodo.value = "";
+
+        // re-render current project
+        displayProjectTodos(project, app);
+    });
+
+    // plus icon submit button
+    plusIcon.addEventListener("click", () => {
+        addTodoForm.requestSubmit();
+    });
+
+    todoContainer.appendChild(addTodoForm);
 };
