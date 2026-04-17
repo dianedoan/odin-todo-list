@@ -137,28 +137,9 @@ function displayTodos(project, app, todoContainer) {
         const todoDueDate = document.createElement("p");
         todoDueDate.textContent = todo.dueDate;
         generalTodoContainer.appendChild(todoDueDate);
-
-        // // delete button
-        // const todoDeleteBtn = document.createElement("button");
-        // todoDeleteBtn.classList = "todo-delete";
-        // todoDeleteBtn.textContent = `×`;
-        // generalTodoContainer.appendChild(todoDeleteBtn);
         
         todoItem.appendChild(generalTodoContainer);
         todoContainer.appendChild(todoItem);
-        
-        // // handle todo delete 
-        // todoDeleteBtn.addEventListener("click", (e) => {
-        //     e.stopPropagation();
-        //     app.removeTodo(todo);
-            
-        //     const currentHeader = contentContainer.querySelector("h2")?.textContent;
-        //     if (currentHeader === app.createInbox().title) {
-        //         displayInboxTodos(app);
-        //     } else {
-        //         displayProjectTodos(project, app);
-        //     }
-        // });
         
         // expand single todo details on click
         chevronDownIcon.addEventListener("click", () => expandTodo(todoItem, todo, app));
@@ -214,6 +195,7 @@ function expandTodo(todoItem, todo, app) {
     
     // title, description, duedate, priority
     const todoTitleInput = document.createElement("input");
+    todoTitleInput.required = true;
     todoTitleInput.placeholder = "Title";
     editForm.appendChild(todoTitleInput);
 
@@ -287,7 +269,6 @@ function expandTodo(todoItem, todo, app) {
 
     editTodoDialog.appendChild(editForm);
 
-
     // modal buttons
     const buttonContainer = document.createElement("div");
     buttonContainer.classList = "button-container";
@@ -316,6 +297,33 @@ function expandTodo(todoItem, todo, app) {
     submitTodoBtn.classList = "submit-todo-btn";
     submitTodoBtn.textContent = "Save Changes"
     buttonContainer.appendChild(submitTodoBtn);
+
+    // handle submit
+    submitTodoBtn.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // get input values
+        const title = todoTitleInput.value.trim();
+        const description = todoDescriptionInput.value.trim();
+        const dueDate = todoDueDateInput.value;
+        const selectedPriority = editTodoDialog.querySelector('input[name="priority"]:checked')?.value;
+
+        // change values
+        app.editTodo(todo, title, description, dueDate, selectedPriority);
+
+        editTodoDialog.close();
+
+        const currentHeader = contentContainer.querySelector("h2")?.textContent;
+
+        if (currentHeader === app.createInbox().title) {
+            displayInboxTodos(app);
+        } else {
+            displayProjectTodos(todo.project, app);
+        }
+    });
+
+    // reset form
+    closeModal(editTodoDialog, editForm);
     
     editTodoDialog.appendChild(buttonContainer);
     todoDetails.appendChild(editTodoDialog);
@@ -335,7 +343,7 @@ function addTodo(todoContainer, project, app) {
     addTodoForm.appendChild(plusIcon);
     
     // input
-    const newTodo = document.createElement("input")
+    const newTodo = document.createElement("input");
     newTodo.type = "text";
     newTodo.placeholder = "Add todo...";
     addTodoForm.appendChild(newTodo);
@@ -367,3 +375,9 @@ function addTodo(todoContainer, project, app) {
 
     todoContainer.appendChild(addTodoForm);
 };
+
+function closeModal(modal, form) {
+    modal.addEventListener("close", () => {
+        form.reset(); // reset form
+    });
+}

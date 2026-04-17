@@ -27,6 +27,13 @@ export default class App {
         project.todoList.push(newTodo);
         return newTodo;
     }
+
+    editTodo(todo, title, description, dueDate, priority) {
+        todo.title = title;
+        todo.description = description;
+        todo.dueDate = dueDate;
+        todo.priority = priority;
+    }
     
     removeTodo(todo) {
         const todoIndex = todo.project.todoList.findIndex(item => item.id === todo.id);
