@@ -1,4 +1,5 @@
 import plus from "./images/plus.svg";
+import chevronDown from "./images/chevron-down.svg";
 
 const container = document.querySelector(".container");
 const sidebar = document.querySelector(".sidebar");
@@ -116,11 +117,21 @@ function displayTodos(project, app, todoContainer) {
 
         const generalTodoContainer = document.createElement("div");
         generalTodoContainer.classList = "general-todo";
-
+        
+        const todoTitleContainer = document.createElement("div");
+        todoTitleContainer.classList = "todo-title-container";
+        
         // todo title
         const todoTitle = document.createElement("p");
         todoTitle.textContent = todo.title;
-        generalTodoContainer.appendChild(todoTitle);
+        todoTitleContainer.appendChild(todoTitle);
+
+        // chevron icon
+        const chevronDownIcon = document.createElement("img");
+        chevronDownIcon.src = chevronDown;
+        chevronDownIcon.classList = "todo-chevron";
+        todoTitleContainer.appendChild(chevronDownIcon);
+        generalTodoContainer.appendChild(todoTitleContainer);
         
         // todo due date
         const todoDueDate = document.createElement("p");
@@ -136,13 +147,11 @@ function displayTodos(project, app, todoContainer) {
         todoItem.appendChild(generalTodoContainer);
         todoContainer.appendChild(todoItem);
         
-        // expand single todo details on click
-        todoItem.addEventListener("click", () => expandTodo(todoItem, todo));
-
+        // handle todo delete 
         todoDelete.addEventListener("click", (e) => {
             e.stopPropagation();
             app.removeTodo(todo);
-
+            
             const currentHeader = contentContainer.querySelector("h2")?.textContent;
             if (currentHeader === app.createInbox().title) {
                 displayInboxTodos(app);
@@ -150,6 +159,9 @@ function displayTodos(project, app, todoContainer) {
                 displayProjectTodos(project, app);
             }
         });
+        
+        // expand single todo details on click
+        chevronDownIcon.addEventListener("click", () => expandTodo(todoItem, todo));
     });
 };
 

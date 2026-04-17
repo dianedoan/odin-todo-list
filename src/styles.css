@@ -141,7 +141,7 @@ button {
     flex-direction: row;
 }
 
-.todo-plus {
+.todo-chevron, .todo-plus {
     cursor: pointer;
     width: 20px;
 }
@@ -149,6 +149,7 @@ button {
 input { 
     border: none;
     font-size: 1rem;
+    width: 100%;
 }
 
 input:focus {
@@ -178,6 +179,12 @@ input:focus {
     justify-content: space-between;
     align-items: center;
     padding-right: 22px;
+}
+
+.todo-title-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
 .todo-delete {
