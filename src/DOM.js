@@ -153,9 +153,9 @@ function displayTodos(project, app, todoContainer) {
         const todoDueDate = document.createElement("p");
         todoDueDate.classList = "todo-duedate";
 
-        const dueDate = startOfDay(parseISO(todo.dueDate)) ? startOfDay(parseISO(todo.dueDate)) : null;
+        const dueDate = todo.dueDate ? todo.dueDate : null;
         if (dueDate) {
-            todoDueDate.textContent = formatDistanceToNow(dueDate, { addSuffix: true });
+            todoDueDate.textContent = formatDistanceToNow(startOfDay(parseISO(todo.dueDate)), { addSuffix: true });
             priorityDueDateContainer.appendChild(todoDueDate);
         }
 
