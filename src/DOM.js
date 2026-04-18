@@ -45,7 +45,7 @@ export function displayInboxTodos(app) {
     
     // display inbox name
     const inboxTitle = document.createElement("h2");
-    inboxTitle.textContent = app.createInbox().title;
+    inboxTitle.textContent = "Inbox";
     projectHeader.appendChild(inboxTitle);
 
     contentContainer.appendChild(projectHeader);
@@ -416,7 +416,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
         
         const currentHeader = contentContainer.querySelector("h2")?.textContent;
         const project = app.getProjectById(todo.projectId);
-        if (currentHeader === app.createInbox().title) {
+        if (currentHeader === "Inbox") {
             displayInboxTodos(app);
         } else {
             displayProjectTodos(project, app);
@@ -490,7 +490,7 @@ function handleDeleteTodo(deleteButton, app, todo) {
         
         const currentHeader = contentContainer.querySelector("h2")?.textContent;
         const project = app.getProjectById(todo.projectId);
-        if (currentHeader === app.createInbox().title) {
+        if (currentHeader === "Inbox") {
             displayInboxTodos(app);
         } else {
             displayProjectTodos(project, app);
