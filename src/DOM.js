@@ -1,4 +1,4 @@
-import { format, formatDistance, formatRelative } from 'date-fns'
+import { parseISO, startOfDay, formatDistanceToNow } from 'date-fns'
 import plus from "./images/plus.svg";
 import chevronDown from "./images/chevron-down.svg";
 
@@ -153,10 +153,9 @@ function displayTodos(project, app, todoContainer) {
         const todoDueDate = document.createElement("p");
         todoDueDate.classList = "todo-duedate";
 
-        const dueDate = todo.dueDate ? new Date(todo.dueDate) : null;
+        const dueDate = startOfDay(parseISO(todo.dueDate)) ? startOfDay(parseISO(todo.dueDate)) : null;
         if (dueDate) {
-            todoDueDate.textContent = `${formatDistance(todo.dueDate, new Date())} left`;
-            // todoDueDate.textContent = `due ${format(dueDate, 'PPPP')}`;
+            todoDueDate.textContent = formatDistanceToNow(dueDate, { addSuffix: true });
             priorityDueDateContainer.appendChild(todoDueDate);
         }
 
