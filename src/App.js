@@ -36,7 +36,8 @@ export default class App {
     }
     
     removeTodo(todo) {
-        const todoIndex = todo.project.todoList.findIndex(item => item.id === todo.id);
-        todo.project.todoList.splice(todoIndex, 1);
+        const project = this.projectList.find(p => p.id === todo.projectId);
+        const todoIndex = project.todoList.findIndex(item => item.id === todo.id);
+        project.todoList.splice(todoIndex, 1);
     }
 }
