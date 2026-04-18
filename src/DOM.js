@@ -188,6 +188,58 @@ function expandTodo(todoItem, todo, app) {
 
     todoDetails.appendChild(editTodoBtn);
 
+    // edit todo modal
+    handleTodoForm(app, todo, todoDetails);
+    
+    todoItem.appendChild(todoDetails);
+};
+
+function addTodo(todoContainer, project, app) {
+    const addTodoForm = document.createElement("form");
+    addTodoForm.classList = "add-todo";
+    
+    // icon
+    const plusIcon = document.createElement("img");
+    plusIcon.src = plus;
+    plusIcon.classList = "todo-plus";
+    plusIcon.type = "submit";
+    addTodoForm.appendChild(plusIcon);
+    
+    // input
+    const newTodo = document.createElement("input");
+    newTodo.type = "text";
+    newTodo.placeholder = "Add todo...";
+    addTodoForm.appendChild(newTodo);
+
+    // handle submit
+    addTodoForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // remove any whitespaces
+        const todoInput = newTodo.value.trim();
+
+        // prevent empty todo submits
+        if (!todoInput) return;
+
+        // create todo
+        app.createTodo(project, todoInput, "", "", "");
+
+        // clear input
+        newTodo.value = "";
+
+        // re-render current project
+        displayProjectTodos(project, app);
+    });
+
+    // plus icon submit button
+    plusIcon.addEventListener("click", () => {
+        addTodoForm.requestSubmit();
+    });
+
+    todoContainer.appendChild(addTodoForm);
+};
+
+function handleEditTodoForm(app, todo, todoDetails) {
     // edit todo dialog
     const editTodoDialog = document.createElement("dialog");
     editTodoDialog.id = "edit-todo-dialog";
@@ -368,55 +420,7 @@ function expandTodo(todoItem, todo, app) {
 
     // reset form
     closeModal(editTodoDialog, editForm);
-    
-    
-    todoItem.appendChild(todoDetails);
-};
-
-function addTodo(todoContainer, project, app) {
-    const addTodoForm = document.createElement("form");
-    addTodoForm.classList = "add-todo";
-    
-    // icon
-    const plusIcon = document.createElement("img");
-    plusIcon.src = plus;
-    plusIcon.classList = "todo-plus";
-    plusIcon.type = "submit";
-    addTodoForm.appendChild(plusIcon);
-    
-    // input
-    const newTodo = document.createElement("input");
-    newTodo.type = "text";
-    newTodo.placeholder = "Add todo...";
-    addTodoForm.appendChild(newTodo);
-
-    // handle submit
-    addTodoForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        // remove any whitespaces
-        const todoInput = newTodo.value.trim();
-
-        // prevent empty todo submits
-        if (!todoInput) return;
-
-        // create todo
-        app.createTodo(project, todoInput, "", "", "");
-
-        // clear input
-        newTodo.value = "";
-
-        // re-render current project
-        displayProjectTodos(project, app);
-    });
-
-    // plus icon submit button
-    plusIcon.addEventListener("click", () => {
-        addTodoForm.requestSubmit();
-    });
-
-    todoContainer.appendChild(addTodoForm);
-};
+}
 
 export function handleProjectForm(app) {
     // create project modal
