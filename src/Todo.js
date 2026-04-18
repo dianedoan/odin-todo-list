@@ -4,7 +4,7 @@ export default class Todo {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.projectId = project.id;
+        this.projectId = project ? project.id : null;
 		this.id = crypto.randomUUID();
     }   
 }
