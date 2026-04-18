@@ -16,9 +16,33 @@
                 <button class="create-project-btn" command="show-modal" commandfor="create-project-dialog">Create Project</button>
                 <dialog id="create-project-dialog">
                     <button id="close-btn" commandfor="create-project-dialog" command="close">×</button>
-                    <h4>Create Project</h4>
-                    <form id="create-project-form" action="">
-        
+                    <form id="create-project-form">
+                        <h4>Create Project</h4>
+                        <div class="form-container">
+                            <div class="form-input-container">
+                                <label for="create-project-title">Title</label>
+                                <input type="text" id="create-project-title" required>
+                            </div>
+                            <div class="form-input-container">
+                                <img class="todo-plus" src="./images/plus.svg" alt="plus-icon">
+                                <input type="text" id="create-project-todo1" placeholder="Add todo...">
+                            </div>
+                            <div class="form-input-container">
+                                <img class="todo-plus" src="./images/plus.svg" alt="plus-icon">
+                                <input type="text" id="create-project-todo2" placeholder="Add todo...">
+                            </div>
+                            <div class="form-input-container">
+                                <img class="todo-plus" src="./images/plus.svg" alt="plus-icon">
+                                <input type="text" id="create-project-todo3" placeholder="Add todo...">
+                            </div>
+                            <div class="form-input-container">
+                                <img class="todo-plus" src="./images/plus.svg" alt="plus-icon">
+                                <input type="text" id="create-project-todo4" placeholder="Add todo...">
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="submit-project-btn" type="submit">Save Changes</button>
+                        </div>
                     </form>
                 </dialog>
             </div>
