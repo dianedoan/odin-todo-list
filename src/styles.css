@@ -79,6 +79,12 @@ header {
     gap: 10px;
 }
 
+.form-input-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
 label {
     font-size: 0.9rem;
 }
@@ -96,17 +102,21 @@ input:focus, textarea:focus {
 .form-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+}
+
+#create-project-form, #edit-todo-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
 }
 
 #edit-todo-form {
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    height: 100%;
 }
 
-#edit-todo-form label {
+#create-project-dialog label, #edit-todo-form label {
     width: 80px;
     align-self: center;
     padding: 0 5px;
@@ -114,10 +124,9 @@ input:focus, textarea:focus {
 
 #edit-todo-form .priority-radio-item label {
     width: auto;
-
 }
 
-#edit-todo-form input, #edit-todo-form textarea {
+#create-project-dialog input, #create-project-dialog textarea, #edit-todo-form input, #edit-todo-form textarea {
     background-color: #e7e7e773;
     border-radius: 5px;
     padding: 6px;
@@ -150,15 +159,6 @@ input:focus, textarea:focus {
     flex-direction: row;
 }
 
-#close-btn {
-    border: none;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background-color: #fff;
-    font-size: 1.5rem;
-}
-
 .project-list {
     display: grid;
     gap: 5px;
@@ -183,13 +183,24 @@ button {
     cursor: pointer;
 }
 
+#close-btn {
+    border: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: #fff;
+    font-size: 1.5rem;
+}
+
 .button-container {
     display: flex;
     flex-direction: row;
     align-self: end;
+    justify-content: flex-end;
+    margin-top: auto;
 }
 
-.create-project-btn, .delete-project-btn, .edit-todo-btn, .submit-todo-btn, .delete-todo-btn {
+.create-project-btn, .delete-project-btn, .edit-todo-btn, .submit-project-btn, .submit-todo-btn, .delete-todo-btn {
     background-color: var(--button-color);
     color: #fff;
     font-weight: bold;
@@ -199,7 +210,7 @@ button {
     font-size: 0.8rem;
 }
 
-.create-project-btn, .delete-project-btn, .submit-todo-btn, .delete-todo-btn {
+.create-project-btn, .delete-project-btn, .submit-project-btn, .submit-todo-btn, .delete-todo-btn {
     width: 100px;
     padding: 8px 0px;
     margin-left: 10px;

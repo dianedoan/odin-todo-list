@@ -1,6 +1,6 @@
 import "./styles.css";
 import App from "./App.js";
-import { displayProjects, displayInboxTodos } from "./DOM.js";
+import { displayProjects, displayInboxTodos, handleProjectForm } from "./DOM.js";
 
 const app = new App();
 const myProject1 = app.createProject("Project 1");
@@ -15,3 +15,6 @@ displayProjects(app);
 
 // inbox startup page
 displayInboxTodos(app);
+
+// create project form
+handleProjectForm(app);

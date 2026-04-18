@@ -9,14 +9,6 @@ const projectsContainer = document.querySelector(".project-list");
 export function displayProjects(app) {
     const inboxItem = document.querySelector(".inbox-item");
 
-    // create project modal
-    const createProjectModal = document.querySelector("#create-project-dialog");
-
-    // close modal 
-    createProjectModal.addEventListener("close", () => {
-        // reset form
-    });
-
     // clear existing display
     projectsContainer.innerHTML = "";
 
@@ -208,7 +200,6 @@ function expandTodo(todoItem, todo, app) {
     closeButton.setAttribute("commandfor", "edit-todo-dialog");
     editTodoDialog.appendChild(closeButton);
 
-    
     // form
     const editForm = document.createElement("form");
     editForm.id = "edit-todo-form";
@@ -427,8 +418,64 @@ function addTodo(todoContainer, project, app) {
     todoContainer.appendChild(addTodoForm);
 };
 
-function closeModal(modal, form) {
-    modal.addEventListener("close", () => {
+export function handleProjectForm(app) {
+    // create project modal
+    const createProjectDialog = document.querySelector("#create-project-dialog");
+    
+    // handle submit
+    const createProjectForm = document.querySelector("#create-project-form");
+    createProjectForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const createProjectTitleInput = document.querySelector("#create-project-title");
+        const projectTitle = createProjectTitleInput.value.trim();
+
+        // prevent empty todo submits
+        if (!projectTitle) return;
+
+        // create project
+        const project = app.createProject(projectTitle);
+        
+        // add todos
+        const createProjectTodoInput1 = document.querySelector("#create-project-todo1");
+        const projectTodo1 = createProjectTodoInput1.value.trim();
+        if (projectTodo1) {
+            app.createTodo(project, projectTodo1, "", "", "");
+        }
+
+        const createProjectTodoInput2 = document.querySelector("#create-project-todo2");
+        const projectTodo2 = createProjectTodoInput2.value.trim();
+        if (projectTodo2) {
+            app.createTodo(project, projectTodo2, "", "", "");
+        }
+        
+        const createProjectTodoInput3 = document.querySelector("#create-project-todo3");
+        const projectTodo3 = createProjectTodoInput3.value.trim();
+        if (projectTodo3) {
+            app.createTodo(project, projectTodo3, "", "", "");
+        }
+
+        const createProjectTodoInput4 = document.querySelector("#create-project-todo4");
+        const projectTodo4 = createProjectTodoInput4.value.trim();
+        if (projectTodo4) {
+            app.createTodo(project, projectTodo4, "", "", "");
+        }
+
+        // reset form
+        createProjectDialog.close();
+
+        // re-render list of projects
+        displayProjects(app);
+
+        // re-render inbox todos
+        displayInboxTodos(app);
+
+        closeModal(createProjectDialog, createProjectForm)
+    });
+};
+
+function closeModal(dialog, form) {
+    dialog.addEventListener("close", () => {
         form.reset(); // reset form
     });
 }
