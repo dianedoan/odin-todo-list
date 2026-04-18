@@ -299,5 +299,9 @@ button {
     border-radius: 20px;
     padding: 4px 7px;
     font-size: 0.6rem;
-    margin: 0 5px;
+}
+
+.todo-duedate {
+    color: var(--accent-color);
+    font-size: 0.8rem;
 }

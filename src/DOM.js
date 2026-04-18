@@ -1,3 +1,4 @@
+import { format, formatDistance, formatRelative } from 'date-fns'
 import plus from "./images/plus.svg";
 import chevronDown from "./images/chevron-down.svg";
 
@@ -150,8 +151,15 @@ function displayTodos(project, app, todoContainer) {
         
         // todo due date
         const todoDueDate = document.createElement("p");
-        todoDueDate.textContent = todo.dueDate;
-        priorityDueDateContainer.appendChild(todoDueDate);
+        todoDueDate.classList = "todo-duedate";
+
+        const dueDate = todo.dueDate ? new Date(todo.dueDate) : null;
+        if (dueDate) {
+            todoDueDate.textContent = `${formatDistance(todo.dueDate, new Date())} left`;
+            // todoDueDate.textContent = `due ${format(dueDate, 'PPPP')}`;
+            priorityDueDateContainer.appendChild(todoDueDate);
+        }
+
         generalTodoContainer.appendChild(priorityDueDateContainer);
 
         todoItem.appendChild(generalTodoContainer);
@@ -298,7 +306,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
 
     const todoDueDateInput = document.createElement("input");
     todoDueDateInput.type = "date";
-    todoDueDateInput.value = todo.dueDate || "";
+    todoDueDateInput.value = todo.dueDate || null;
     dueDateContainer.appendChild(todoDueDateInput);
     formContainer.appendChild(dueDateContainer);
     
@@ -447,25 +455,25 @@ export function handleProjectForm(app) {
         const createProjectTodoInput1 = document.querySelector("#create-project-todo1");
         const projectTodo1 = createProjectTodoInput1.value.trim();
         if (projectTodo1) {
-            app.createTodo(project, projectTodo1, "", "", "");
+            app.createTodo(project, projectTodo1, "", null, "");
         }
 
         const createProjectTodoInput2 = document.querySelector("#create-project-todo2");
         const projectTodo2 = createProjectTodoInput2.value.trim();
         if (projectTodo2) {
-            app.createTodo(project, projectTodo2, "", "", "");
+            app.createTodo(project, projectTodo1, "", null, "");
         }
         
         const createProjectTodoInput3 = document.querySelector("#create-project-todo3");
         const projectTodo3 = createProjectTodoInput3.value.trim();
         if (projectTodo3) {
-            app.createTodo(project, projectTodo3, "", "", "");
+            app.createTodo(project, projectTodo1, "", null, "");
         }
 
         const createProjectTodoInput4 = document.querySelector("#create-project-todo4");
         const projectTodo4 = createProjectTodoInput4.value.trim();
         if (projectTodo4) {
-            app.createTodo(project, projectTodo4, "", "", "");
+            app.createTodo(project, projectTodo1, "", null, "");
         }
 
         // reset form
