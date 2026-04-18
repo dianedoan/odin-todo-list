@@ -177,19 +177,32 @@ function expandTodo(todoItem, todo, app) {
     const todoDescription = document.createElement("p");
     todoDescription.textContent = todo.description;
     todoDetails.appendChild(todoDescription);
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList = "button-container";
+
+    // delete button
+    const deleteTodoBtn = document.createElement("button");
+    deleteTodoBtn.classList = "small-delete-todo-btn";
+    deleteTodoBtn.textContent = "Delete";
+
+    buttonContainer.appendChild(deleteTodoBtn);
+
+    // handle delete event 
+    handleDeleteTodo(deleteTodoBtn, app, todo);
     
     // edit button
     const editTodoBtn = document.createElement("button");
-    editTodoBtn.classList = "edit-todo-btn";
+    editTodoBtn.classList = "small-edit-todo-btn";
     editTodoBtn.textContent = "Edit";
-
     editTodoBtn.setAttribute("command", "show-modal");
     editTodoBtn.setAttribute("commandfor", "edit-todo-dialog");
 
-    todoDetails.appendChild(editTodoBtn);
+    buttonContainer.appendChild(editTodoBtn);
+    todoDetails.appendChild(buttonContainer);
 
     // edit todo modal
-    handleTodoForm(app, todo, todoDetails);
+    handleEditTodoForm(app, todo, todoDetails);
     
     todoItem.appendChild(todoDetails);
 };
@@ -371,18 +384,8 @@ function handleEditTodoForm(app, todo, todoDetails) {
     deleteTodoBtn.textContent = "Delete Todo"
     buttonContainer.appendChild(deleteTodoBtn);
 
-    // handle todo delete 
-    deleteTodoBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        app.removeTodo(todo);
-        
-        const currentHeader = contentContainer.querySelector("h2")?.textContent;
-        if (currentHeader === app.createInbox().title) {
-            displayInboxTodos(app);
-        } else {
-            displayProjectTodos(project, app);
-        }
-    });
+    // handle delete event 
+    handleDeleteTodo(deleteTodoBtn, app, todo);
     
     // submit button
     const submitTodoBtn = document.createElement("button");
@@ -475,6 +478,20 @@ export function handleProjectForm(app) {
         displayInboxTodos(app);
 
         closeModal(createProjectDialog, createProjectForm)
+    });
+};
+
+function handleDeleteTodo(deleteButton, app, todo) {
+    deleteButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        app.removeTodo(todo);
+        
+        const currentHeader = contentContainer.querySelector("h2")?.textContent;
+        if (currentHeader === app.createInbox().title) {
+            displayInboxTodos(app);
+        } else {
+            displayProjectTodos(project, app);
+        }
     });
 };
 
