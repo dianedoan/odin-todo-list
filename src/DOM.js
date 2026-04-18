@@ -410,13 +410,13 @@ function handleEditTodoForm(app, todo, todoDetails) {
         app.editTodo(todo, title, description, dueDate, selectedPriority);
 
         editTodoDialog.close();
-
+        
         const currentHeader = contentContainer.querySelector("h2")?.textContent;
-
+        const project = app.getProjectById(todo.projectId);
         if (currentHeader === app.createInbox().title) {
             displayInboxTodos(app);
         } else {
-            displayProjectTodos(todo.project, app);
+            displayProjectTodos(project, app);
         }
     });
 
@@ -486,10 +486,11 @@ function handleDeleteTodo(deleteButton, app, todo) {
         app.removeTodo(todo);
         
         const currentHeader = contentContainer.querySelector("h2")?.textContent;
+        const project = app.getProjectById(todo.projectId);
         if (currentHeader === app.createInbox().title) {
             displayInboxTodos(app);
         } else {
-            displayProjectTodos(todo.project, app);
+            displayProjectTodos(project, app);
         }
     });
 };

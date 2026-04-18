@@ -17,6 +17,10 @@ export default class App {
         return newProject;
     }
 
+    getProjectById(projectId) {
+        return this.projectList.find(p => p.id === projectId);
+    }
+
     removeProject(project) {
         const projectIndex = this.projectList.findIndex(item => item.id === project.id);
         this.projectList.splice(projectIndex, 1);
