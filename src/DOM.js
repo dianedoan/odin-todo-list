@@ -306,7 +306,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
 
     const todoDueDateInput = document.createElement("input");
     todoDueDateInput.type = "date";
-    todoDueDateInput.value = todo.dueDate || null;
+    todoDueDateInput.defaultValue = todo.dueDate || null;
     dueDateContainer.appendChild(todoDueDateInput);
     formContainer.appendChild(dueDateContainer);
     
@@ -327,7 +327,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoNoPriorityInput.id = "no-priority";
     todoNoPriorityInput.name = "priority";
     todoNoPriorityInput.value = "";
-    todoNoPriorityInput.checked = !todo.priority;
+    todoNoPriorityInput.defaultChecked = !todo.priority;
     todoNoPriorityContainer.appendChild(todoNoPriorityInput);
     const todoNoPriorityLabel = document.createElement("label");
     todoNoPriorityLabel.textContent = "None";
@@ -341,7 +341,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoLowPriorityInput.id = "low";
     todoLowPriorityInput.name = "priority";
     todoLowPriorityInput.value = "low";
-    todoLowPriorityInput.checked = todo.priority === "low";
+    todoLowPriorityInput.defaultChecked = todo.priority === "low";
     todoLowPriorityContainer.appendChild(todoLowPriorityInput);
     const todoLowPriorityLabel = document.createElement("label");
     todoLowPriorityLabel.textContent = "Low";
@@ -355,7 +355,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoMediumPriorityInput.id = "medium";
     todoMediumPriorityInput.name = "priority";
     todoMediumPriorityInput.value = "medium";
-    todoMediumPriorityInput.checked = todo.priority === "medium";
+    todoMediumPriorityInput.defaultChecked = todo.priority === "medium";
     todoMediumPriorityContainer.appendChild(todoMediumPriorityInput);
     const todoMediumPriorityLabel = document.createElement("label");
     todoMediumPriorityLabel.textContent = "Medium";
@@ -369,7 +369,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoHighPriorityInput.id = "high";
     todoHighPriorityInput.name = "priority";
     todoHighPriorityInput.value = "high";
-    todoHighPriorityInput.checked = todo.priority === "high";
+    todoHighPriorityInput.defaultChecked = todo.priority === "high";
     todoHighPriorityContainer.appendChild(todoHighPriorityInput);
     const todoHighPriorityLabel = document.createElement("label");
     todoHighPriorityLabel.textContent = "High";
@@ -452,19 +452,19 @@ export function handleProjectForm(app) {
         const createProjectTodoInput2 = document.querySelector("#create-project-todo2");
         const projectTodo2 = createProjectTodoInput2.value.trim();
         if (projectTodo2) {
-            app.createTodo(project, projectTodo1, "", null, "");
+            app.createTodo(project, projectTodo2, "", null, "");
         }
         
         const createProjectTodoInput3 = document.querySelector("#create-project-todo3");
         const projectTodo3 = createProjectTodoInput3.value.trim();
         if (projectTodo3) {
-            app.createTodo(project, projectTodo1, "", null, "");
+            app.createTodo(project, projectTodo3, "", null, "");
         }
 
         const createProjectTodoInput4 = document.querySelector("#create-project-todo4");
         const projectTodo4 = createProjectTodoInput4.value.trim();
         if (projectTodo4) {
-            app.createTodo(project, projectTodo1, "", null, "");
+            app.createTodo(project, projectTodo4, "", null, "");
         }
 
         // reset form
