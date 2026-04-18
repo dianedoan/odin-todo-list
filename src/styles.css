@@ -116,6 +116,10 @@ input:focus, textarea:focus {
     justify-content: space-between;
 }
 
+#create-project-dialog .todo-plus {
+    cursor: auto;
+}
+
 #create-project-dialog label, #edit-todo-form label {
     width: 80px;
     align-self: center;
