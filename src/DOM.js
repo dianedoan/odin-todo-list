@@ -385,15 +385,6 @@ function handleEditTodoForm(app, todo, todoDetails) {
     // modal buttons
     const buttonContainer = document.createElement("div");
     buttonContainer.classList = "button-container";
-
-    // delete button
-    const deleteTodoBtn = document.createElement("button");
-    deleteTodoBtn.classList = "delete-todo-btn";
-    deleteTodoBtn.textContent = "Delete Todo"
-    buttonContainer.appendChild(deleteTodoBtn);
-
-    // handle delete event 
-    handleDeleteTodo(deleteTodoBtn, app, todo);
     
     // submit button
     const submitTodoBtn = document.createElement("button");
@@ -498,7 +489,7 @@ function handleDeleteTodo(deleteButton, app, todo) {
         if (currentHeader === app.createInbox().title) {
             displayInboxTodos(app);
         } else {
-            displayProjectTodos(project, app);
+            displayProjectTodos(todo.project, app);
         }
     });
 };
