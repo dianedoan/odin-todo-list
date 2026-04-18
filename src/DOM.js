@@ -329,6 +329,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoNoPriorityInput.defaultChecked = !todo.priority;
     todoNoPriorityContainer.appendChild(todoNoPriorityInput);
     const todoNoPriorityLabel = document.createElement("label");
+    todoNoPriorityLabel.htmlFor = "no-priority";
     todoNoPriorityLabel.textContent = "None";
     todoNoPriorityContainer.appendChild(todoNoPriorityLabel);
     priorityRadioContainer.appendChild(todoNoPriorityContainer);
@@ -343,6 +344,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoLowPriorityInput.defaultChecked = todo.priority === "low";
     todoLowPriorityContainer.appendChild(todoLowPriorityInput);
     const todoLowPriorityLabel = document.createElement("label");
+    todoLowPriorityLabel.htmlFor = "low";
     todoLowPriorityLabel.textContent = "Low";
     todoLowPriorityContainer.appendChild(todoLowPriorityLabel);
     priorityRadioContainer.appendChild(todoLowPriorityContainer);
@@ -357,6 +359,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoMediumPriorityInput.defaultChecked = todo.priority === "medium";
     todoMediumPriorityContainer.appendChild(todoMediumPriorityInput);
     const todoMediumPriorityLabel = document.createElement("label");
+    todoMediumPriorityLabel.htmlFor = "medium";
     todoMediumPriorityLabel.textContent = "Medium";
     todoMediumPriorityContainer.appendChild(todoMediumPriorityLabel);
     priorityRadioContainer.appendChild(todoMediumPriorityContainer);
@@ -371,6 +374,7 @@ function handleEditTodoForm(app, todo, todoDetails) {
     todoHighPriorityInput.defaultChecked = todo.priority === "high";
     todoHighPriorityContainer.appendChild(todoHighPriorityInput);
     const todoHighPriorityLabel = document.createElement("label");
+    todoHighPriorityLabel.htmlFor = "high";
     todoHighPriorityLabel.textContent = "High";
     todoHighPriorityContainer.appendChild(todoHighPriorityLabel);
     priorityRadioContainer.appendChild(todoHighPriorityContainer);
