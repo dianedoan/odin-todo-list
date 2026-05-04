@@ -1,4 +1,4 @@
-# Odin Todo List
+# Todo List
 This [webpage](https://dianedoan.github.io/odin-todo-list/) is a basic Todo List application.
 
 The user interface includes the following features:
